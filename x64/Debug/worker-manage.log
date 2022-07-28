@@ -1,4 +1,8 @@
 ﻿  boos.cpp
+  main.cpp
   manager.cpp
+  workerManage.cpp
+  employee.cpp
   正在生成代码...
-  worker-manage.vcxproj -> D:\case\cpp-demo\worker-manage\x64\Debug\worker-manage.exe
+  LINK : 没有找到 D:\case\cpp\cpp-worker-manage\x64\Debug\worker-manage.exe 或上一个增量链接没有生成它；正在执行完全链接
+  worker-manage.vcxproj -> D:\case\cpp\cpp-worker-manage\x64\Debug\worker-manage.exe
