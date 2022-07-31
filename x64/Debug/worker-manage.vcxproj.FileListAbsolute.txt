@@ -1,2 +1,3 @@
 D:\case\cpp-demo\worker-manage\x64\Debug\worker-manage.exe
 D:\case\cpp\cpp-worker-manage\x64\Debug\worker-manage.exe
+D:\case\cpp-demo\cpp-worker-manage\x64\Debug\worker-manage.exe

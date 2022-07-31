@@ -93,10 +93,10 @@ void WorkerManage::addEmp() {
 		delete this->empArray;
 		// 完成添加
 		cout << "成功添加" << addNum << "个职工";
-		system("pause");
-		exit(0);
 	}
 	else {
 		cout << "请输入正确的职工数量" << endl;
 	}
+	system("pause");
+	system("cls");
 };
