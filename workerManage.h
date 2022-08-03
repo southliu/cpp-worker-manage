@@ -1,7 +1,9 @@
 #pragma once
 #include <iostream>
+#include <fstream>
 using namespace std;
 #include "worker.h"
+#define FILE_NAME "emp.txt"
 
 class WorkerManage {
 public:
@@ -13,6 +15,8 @@ public:
 	void exitSystem(); 
 	// 添加职工
 	void addEmp();
+	// 保存文件
+	void save();
 
 	// 记录职工人数
 	int empNum;

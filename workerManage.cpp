@@ -5,6 +5,8 @@
 
 WorkerManage::WorkerManage() {
 	cout << "WorkerManage构造函数" << endl;
+	this->empNum = 0;
+	this->empArray = NULL;
 }
 
 WorkerManage::~WorkerManage() {
@@ -56,17 +58,23 @@ void WorkerManage::addEmp() {
 		for (int i = 0; i < addNum; i++) {
 			int id;
 			string name;
-			int choice;
+			int choice = -1;
 
 			cout << "请输入第" << i + 1 << "个职工编号：" << endl;
 			cin >> id;
 			cout << "请输入第" << i + 1 << "个职工姓名：" << endl;
 			cin >> name;
-			cout << "请输入第" << i + 1 << "个职工岗位："
-				<< "\n1、普通职工"
-				<< "\n2、经理"
-				<< "\n3、老板" << endl;
-			cin >> choice;
+			while (true) {
+				if (choice == 1 || choice == 2 || choice == 3) {
+					break;
+				};
+				cout << "输入参数有误" << endl;
+				cout << "请输入第" << i + 1 << "个职工岗位："
+					<< "\n1、普通职工"
+					<< "\n2、经理"
+					<< "\n3、老板" << endl;
+				cin >> choice;
+			};
 
 			Worker* worker = NULL;
 			switch (choice)
@@ -80,23 +88,43 @@ void WorkerManage::addEmp() {
 			default:
 				worker = new Boss(id, name, 3);
 				break;
-			}
+			};
 
+			// 创建职工保存进数组 
 			newSpace[this->empNum + i] = worker;
-		}
+		};
 
+		// 释放空间
+		delete[] this->empArray;
 		// 更改指针内容
 		this->empArray = newSpace;
 		// 长度赋值
 		this->empNum = newSize;
-		// 释放空间
-		delete this->empArray;
 		// 完成添加
 		cout << "成功添加" << addNum << "个职工";
+		// 保存文件
+		save();
 	}
 	else {
 		cout << "请输入正确的职工数量" << endl;
 	}
 	system("pause");
 	system("cls");
+};
+
+// 保存文件
+void WorkerManage::save() {
+	ofstream ofs;
+	// 打开文件
+	ofs.open(FILE_NAME, ios::out);
+
+	for (int i = 0; i < this->empNum; i++) {
+
+		ofs << "id: " << this->empArray[i]->id
+			<< " 名字： " << this->empArray[i]->name
+			<< " 职位： " << this->empArray[i]->deptId << endl;
+	};
+
+	// 关闭文件
+	ofs.close();
 };

@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>D:\case\cpp-demo\cpp-worker-manage\x64\Debug\worker-manage.exe</FullPath>
+      <FullPath>D:\case\cpp\cpp-worker-manage\x64\Debug\worker-manage.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
