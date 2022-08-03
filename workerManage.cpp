@@ -5,8 +5,34 @@
 
 WorkerManage::WorkerManage() {
 	cout << "WorkerManage构造函数" << endl;
-	this->empNum = 0;
-	this->empArray = NULL;
+	ifstream ifs;
+	ifs.open(FILE_NAME, ios::in);
+
+	// 判断文件是否为空
+	if (!ifs.is_open()) {
+		cout << "文件不存在" << endl;
+		this->fileIsEmpty = true;
+		// 初始化配置
+		this->empNum = 0;
+		this->empArray = NULL;
+		// 关闭文件
+		ifs.close();
+		return;
+	};
+
+	// 文件存在，但没数据
+	char ch;
+	ifs >> ch;
+	if (ifs.eof()) {
+		cout << "文件为空" << endl;
+		this->fileIsEmpty = true;
+		// 初始化配置
+		this->empNum = 0;
+		this->empArray = NULL;
+		// 关闭文件
+		ifs.close();
+		return;
+	};
 }
 
 WorkerManage::~WorkerManage() {
@@ -100,6 +126,8 @@ void WorkerManage::addEmp() {
 		this->empArray = newSpace;
 		// 长度赋值
 		this->empNum = newSize;
+		// 更新职工不为空情况
+		this->fileIsEmpty = false;
 		// 完成添加
 		cout << "成功添加" << addNum << "个职工";
 		// 保存文件

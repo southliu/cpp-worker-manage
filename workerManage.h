@@ -18,6 +18,8 @@ public:
 	// 保存文件
 	void save();
 
+	// 判断文件是否为空
+	bool fileIsEmpty;
 	// 记录职工人数
 	int empNum;
 	// 职工数组指针
