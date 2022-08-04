@@ -17,6 +17,10 @@ public:
 	void addEmp();
 	// 保存文件
 	void save();
+	// 获取文件数量
+	int getEmpNum();
+	// 初始化职工
+	void initEmp();
 
 	// 判断文件是否为空
 	bool fileIsEmpty;
