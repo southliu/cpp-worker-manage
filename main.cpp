@@ -6,19 +6,6 @@ using namespace std;
 #include "boss.h"
 
 int main() {
-	/*Worker* worker;
-	worker = new Employee(1, "张三", 3);
-	worker->showInfo();
-	delete worker;
-
-	worker = new Manager(2, "经理", 2);
-	worker->showInfo();
-	delete worker;
-
-	worker = new Boss(3, "老板", 1);
-	worker->showInfo();
-	delete worker;*/
-
 	int choice = -1;
 	while (choice != 0) {
 		WorkerManage wm;
@@ -38,9 +25,11 @@ int main() {
 			break;
 		// 2、显示职工信息
 		case 2:
+			wm.showEmp();
 			break;
 		// 3、修改职工信息
 		case 3:
+			wm.deleteEmp();
 			break;
 		// 4、删除职工信息
 		case 4:

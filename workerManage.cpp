@@ -38,10 +38,11 @@ WorkerManage::WorkerManage() {
 	int num = this->getEmpNum();
 	cout << "职工人数：" << num << endl;
 	this->empNum = num;
-}
 
-WorkerManage::~WorkerManage() {
-	cout << "WorkerManage析构函数" << endl;
+	// 开辟空间
+	this->empArray = new Worker * [this->empNum];
+	// 将文件中的数据，存到数组中
+	this->initEmp();
 }
 
 // 显示菜单
@@ -152,7 +153,6 @@ void WorkerManage::save() {
 	ofs.open(FILE_NAME, ios::out);
 
 	for (int i = 0; i < this->empNum; i++) {
-
 		ofs << this->empArray[i]->id << " "
 			<< this->empArray[i]->name << " "
 			<< this->empArray[i]->deptId << endl;
@@ -219,3 +219,55 @@ void WorkerManage::initEmp() {
 	// 关闭文件
 	ifs.close();
 };
+
+// 显示职工
+void WorkerManage::showEmp() {
+	if (this->fileIsEmpty) {
+		cout << "文件不存在记录为空" << endl;
+	}
+	else {
+		for (int i = 0; i < this->empNum; i++) {
+			// 利用多态调用接口
+			this->empArray[i]->showInfo();
+		}
+	}
+
+	system("pause");
+	system("cls");
+};
+
+// id是否存在，存在返回下标，否则返回-1
+int WorkerManage::isExist(int id) {
+	int res = -1;
+
+	for (int i = 0; i < this->empNum; i++)
+	{
+		if (this->empArray[i]->id == id) {
+			res = i;
+			break;
+		}
+	}
+
+	return res;
+};
+
+// 删除职工
+void WorkerManage::deleteEmp() {
+	char id;
+	cout << "请输入要删除职工的ID：" << endl;
+	cin >> id;
+	int index = this->isExist(id);
+	if (id == -1) {
+		cout << "ID不存在" << endl;
+	}
+	else {
+		cout << index << endl;
+	}
+
+	system("pause");
+	system("cls");
+};
+
+WorkerManage::~WorkerManage() {
+	cout << "WorkerManage析构函数" << endl;
+}

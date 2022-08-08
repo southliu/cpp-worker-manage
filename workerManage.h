@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include<string>
 using namespace std;
 #include "worker.h"
 #define FILE_NAME "emp.txt"
@@ -21,6 +22,12 @@ public:
 	int getEmpNum();
 	// 初始化职工
 	void initEmp();
+	// 显示职工
+	void showEmp();
+	// id是否存在，存在返回下标，否则返回-1
+	int isExist(int id);
+	// 删除职工
+	void deleteEmp();
 
 	// 判断文件是否为空
 	bool fileIsEmpty;
