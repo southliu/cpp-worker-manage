@@ -29,10 +29,10 @@ int main() {
 			break;
 		// 3、修改职工信息
 		case 3:
-			wm.deleteEmp();
 			break;
 		// 4、删除职工信息
 		case 4:
+			wm.deleteEmp();
 			break;
 		// 5、查找职工信息
 		case 5:

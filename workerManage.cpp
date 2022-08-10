@@ -253,15 +253,26 @@ int WorkerManage::isExist(int id) {
 
 // 删除职工
 void WorkerManage::deleteEmp() {
-	char id;
-	cout << "请输入要删除职工的ID：" << endl;
-	cin >> id;
-	int index = this->isExist(id);
-	if (id == -1) {
-		cout << "ID不存在" << endl;
+	if (this->fileIsEmpty) {
+		cout << "文件不存在" << endl;
 	}
 	else {
-		cout << index << endl;
+		int id;
+		cout << "请输入要删除职工的ID：" << endl;
+		cin >> id;
+		int index = this->isExist(id);
+		if (id == -1) {
+			cout << "ID不存在" << endl;
+		}
+		else {
+			for (int i = index; i < this->empNum - 1; i++) {
+				this->empArray[i] = this->empArray[i + 1];
+			};
+			// 更新记录人物
+			this->empNum--;
+			// 数据同步文件中
+			this->save();
+		}
 	}
 
 	system("pause");
