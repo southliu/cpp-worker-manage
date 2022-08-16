@@ -25,9 +25,15 @@ public:
 	// 显示职工
 	void showEmp();
 	// id是否存在，存在返回下标，否则返回-1
-	int isExist(int id);
+	int isExistId(int id);
+	// name是否存在，存在返回下标，否则返回-1
+	int isExistName(string name);
 	// 删除职工
 	void deleteEmp();
+	// 修改职工
+	void updateEmp();
+	// 查找职工
+	void findEmp();
 
 	// 判断文件是否为空
 	bool fileIsEmpty;

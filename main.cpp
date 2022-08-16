@@ -29,6 +29,7 @@ int main() {
 			break;
 		// 3、修改职工信息
 		case 3:
+			wm.updateEmp();
 			break;
 		// 4、删除职工信息
 		case 4:
@@ -36,6 +37,7 @@ int main() {
 			break;
 		// 5、查找职工信息
 		case 5:
+			wm.findEmp();
 			break;
 		// 6、按照编号排序
 		case 6:

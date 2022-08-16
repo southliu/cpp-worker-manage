@@ -225,7 +225,8 @@ void WorkerManage::showEmp() {
 	if (this->fileIsEmpty) {
 		cout << "文件不存在记录为空" << endl;
 	}
-	else {
+	else
+	{
 		for (int i = 0; i < this->empNum; i++) {
 			// 利用多态调用接口
 			this->empArray[i]->showInfo();
@@ -237,12 +238,29 @@ void WorkerManage::showEmp() {
 };
 
 // id是否存在，存在返回下标，否则返回-1
-int WorkerManage::isExist(int id) {
+int WorkerManage::isExistId(int id) {
 	int res = -1;
 
 	for (int i = 0; i < this->empNum; i++)
 	{
-		if (this->empArray[i]->id == id) {
+		if (this->empArray[i]->id == id)
+		{
+			res = i;
+			break;
+		}
+	}
+
+	return res;
+};
+
+// name是否存在，存在返回下标，否则返回-1
+int WorkerManage::isExistName(string name) {
+	int res = -1;
+
+	for (int i = 0; i < this->empNum; i++)
+	{
+		if (this->empArray[i]->name == name)
+		{
 			res = i;
 			break;
 		}
@@ -253,15 +271,17 @@ int WorkerManage::isExist(int id) {
 
 // 删除职工
 void WorkerManage::deleteEmp() {
-	if (this->fileIsEmpty) {
+	if (this->fileIsEmpty)
+	{
 		cout << "文件不存在" << endl;
 	}
-	else {
+	else
+	{
 		int id;
 		cout << "请输入要删除职工的ID：" << endl;
 		cin >> id;
-		int index = this->isExist(id);
-		if (id == -1) {
+		int index = this->isExistId(id);
+		if (index == -1) {
 			cout << "ID不存在" << endl;
 		}
 		else {
@@ -272,7 +292,107 @@ void WorkerManage::deleteEmp() {
 			this->empNum--;
 			// 数据同步文件中
 			this->save();
+			cout << "删除成功" << endl;
 		}
+	}
+
+	system("pause");
+	system("cls");
+};
+
+// 修改职工
+void WorkerManage::updateEmp() {
+	if (this->fileIsEmpty)
+	{
+		cout << "文件不存在" << endl;
+	}
+	else {
+
+		int id;
+		cout << "请输入要修改职工的ID：" << endl;
+		cin >> id;
+		int index = this->isExistId(id);
+		if (index == -1) {
+			cout << "ID不存在" << endl;
+		}
+		else {
+			int id;
+			string name;
+			int choice = -1;
+
+			cout << "请输入职工编号：" << endl;
+			cin >> id;
+			cout << "请输入职工姓名：" << endl;
+			cin >> name;
+			while (true) {
+				if (choice == 1 || choice == 2 || choice == 3) {
+					break;
+				};
+				cout << "输入参数有误" << endl;
+				cout << "请输入职工岗位："
+					<< "\n1、普通职工"
+					<< "\n2、经理"
+					<< "\n3、老板" << endl;
+				cin >> choice;
+			};
+
+			Worker* worker = NULL;
+			switch (choice)
+			{
+			case 1:
+				worker = new Employee(id, name, 1);
+				break;
+			case 2:
+				worker = new Manager(id, name, 2);
+				break;
+			default:
+				worker = new Boss(id, name, 3);
+				break;
+			};
+
+			// 修改职工保存进数组 
+			this->empArray[index] = worker;
+
+			// 数据同步文件中
+			this->save();
+			cout << "修改成功" << endl;
+		}
+	}
+
+	system("pause");
+	system("cls");
+};
+
+// 查找职工
+void WorkerManage::findEmp() {
+	int select;
+	int index; // 查找职工下标
+	while (true) {
+		cout << "请选择查找的职工的方式："
+			<< "\n1: 根据ID查找"
+			<< "\n2: 根据名称查找" << endl;
+		cin >> select;
+		if (select == 1 || select == 2) {
+			break;
+		}
+	}
+	if (select == 1) {
+		int id;
+		cout << "请输入需要查找的职工ID：" << endl;
+		cin >> id;
+		index = this->isExistId(id);
+	}
+	else {
+		string name;
+		cout << "请输入需要查找的职工名称：" << endl;
+		cin >> name;
+		index = this->isExistName(name);
+	}
+	if (index == -1) {
+		cout << "查找信息不存在" << endl;
+	}
+	else {
+		this->empArray[index]->showInfo();
 	}
 
 	system("pause");
