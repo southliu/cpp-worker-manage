@@ -34,6 +34,10 @@ public:
 	void updateEmp();
 	// 查找职工
 	void findEmp();
+	// 显示所有职工
+	void showAllEmp();
+	// 按照编号排序
+	void sortEmp();
 
 	// 判断文件是否为空
 	bool fileIsEmpty;

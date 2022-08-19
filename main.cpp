@@ -41,6 +41,7 @@ int main() {
 			break;
 		// 6、按照编号排序
 		case 6:
+			wm.sortEmp();
 			break;
 		// 7、清空职工系统
 		case 7:

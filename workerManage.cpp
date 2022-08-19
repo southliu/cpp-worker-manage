@@ -308,8 +308,8 @@ void WorkerManage::updateEmp() {
 	}
 	else {
 
-		int id;
 		cout << "请输入要修改职工的ID：" << endl;
+		int id;
 		cin >> id;
 		int index = this->isExistId(id);
 		if (index == -1) {
@@ -365,34 +365,79 @@ void WorkerManage::updateEmp() {
 
 // 查找职工
 void WorkerManage::findEmp() {
-	int select;
-	int index; // 查找职工下标
-	while (true) {
-		cout << "请选择查找的职工的方式："
-			<< "\n1: 根据ID查找"
-			<< "\n2: 根据名称查找" << endl;
-		cin >> select;
-		if (select == 1 || select == 2) {
-			break;
+	if (this->fileIsEmpty)
+	{
+		cout << "文件不存在" << endl;
+	}
+	else {
+		int select;
+		int index; // 查找职工下标
+		while (true) {
+			cout << "请选择查找的职工的方式："
+				<< "\n1: 根据ID查找"
+				<< "\n2: 根据名称查找" << endl;
+			cin >> select;
+			if (select == 1 || select == 2) {
+				break;
+			}
+		}
+		if (select == 1) {
+			int id;
+			cout << "请输入需要查找的职工ID：" << endl;
+			cin >> id;
+			index = this->isExistId(id);
+		}
+		else {
+			string name;
+			cout << "请输入需要查找的职工名称：" << endl;
+			cin >> name;
+			index = this->isExistName(name);
+		}
+		if (index == -1) {
+			cout << "查找信息不存在" << endl;
+		}
+		else {
+			this->empArray[index]->showInfo();
 		}
 	}
-	if (select == 1) {
-		int id;
-		cout << "请输入需要查找的职工ID：" << endl;
-		cin >> id;
-		index = this->isExistId(id);
+
+	system("pause");
+	system("cls");
+};
+
+// 显示所有职工
+void WorkerManage::showAllEmp() {
+	if (this->fileIsEmpty)
+	{
+		cout << "文件不存在" << endl;
+	} else if (this->empNum == 0) {
+		cout << "职工为空" << endl;
 	}
 	else {
-		string name;
-		cout << "请输入需要查找的职工名称：" << endl;
-		cin >> name;
-		index = this->isExistName(name);
+		for (int i = 0; i < empNum; i++)
+		{
+			this->empArray[i]->showInfo();
+		}
 	}
-	if (index == -1) {
-		cout << "查找信息不存在" << endl;
+};
+
+// 按照编号排序
+void WorkerManage::sortEmp() {
+	if (this->fileIsEmpty)
+	{
+		cout << "文件不存在" << endl;
 	}
 	else {
-		this->empArray[index]->showInfo();
+		for (int i = 0; i < this->empNum -1; i++) {
+			for (int j = 0; j < this->empNum - i - 1; j++) {
+				if (this->empArray[j]->id > this->empArray[j + 1]->id) {
+					Worker* temp = this->empArray[j];
+					this->empArray[j] = this->empArray[j + 1];
+					this->empArray[j + 1] = temp;
+				}
+			}
+		}
+		this->showAllEmp();
 	}
 
 	system("pause");
