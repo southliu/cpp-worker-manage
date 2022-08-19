@@ -45,6 +45,7 @@ int main() {
 			break;
 		// 7、清空职工系统
 		case 7:
+			wm.clearEmp();
 			break;
 		default:
 			break;

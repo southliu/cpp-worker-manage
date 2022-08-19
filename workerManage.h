@@ -38,6 +38,8 @@ public:
 	void showAllEmp();
 	// 按照编号排序
 	void sortEmp();
+	// 清空职工系统
+	void clearEmp();
 
 	// 判断文件是否为空
 	bool fileIsEmpty;

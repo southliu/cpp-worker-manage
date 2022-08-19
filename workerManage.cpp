@@ -4,7 +4,6 @@
 #include "boss.h"
 
 WorkerManage::WorkerManage() {
-	cout << "WorkerManage构造函数" << endl;
 	ifstream ifs;
 	ifs.open(FILE_NAME, ios::in);
 
@@ -444,6 +443,58 @@ void WorkerManage::sortEmp() {
 	system("cls");
 };
 
+
+// 清空职工系统
+void WorkerManage::clearEmp() {
+	int select;
+
+	while (true) {
+		cout << "确定清空？"
+			<< "1：确认"
+			<< "2：返回" << endl;
+		cin >> select;
+		if (select == 1 || select == 2) {
+			break;
+		}
+	}
+
+	if (select == 1) {
+		// 如果存在删除文件并重新创建
+		ofstream ofs(FILE_NAME, ios::trunc);
+		ofs.close();
+
+		// 遍历清空每个对象
+		if (this->empArray != NULL) {
+			for (int i = 0; i < this->empNum; i++)
+			{
+				if (this->empArray[i] != NULL) {
+					delete this->empArray[i];
+				}
+			}
+		}
+		this->empNum = 0;
+		delete[] this->empArray;
+		this->empArray = NULL;
+		this->fileIsEmpty = true;
+
+		cout << "清除成功!" << endl;
+		system("pause");
+		system("cls");
+	}
+	else {
+		system("cls");
+	}
+};
+
 WorkerManage::~WorkerManage() {
-	cout << "WorkerManage析构函数" << endl;
+	if (this->empArray != NULL) {
+		for (int i = 0; i < this->empNum; i++)
+		{
+			if (this->empArray[i] != NULL) {
+				delete this->empArray[i];
+			}
+		}
+		delete[] this->empArray;
+		this->empArray = NULL;
+	}
 }
